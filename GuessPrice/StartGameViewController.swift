@@ -12,7 +12,7 @@ class StartGameViewController: UIViewController {
     
     let categories = ["Leather sofas", "Grandfather clocks", "Grills", "Kitchen Blenders", "MIX"]
     
-    
+    var spinner: UIActivityIndicatorView!
     @IBOutlet var greetingTextView: UITextView!
     @IBOutlet var catePickerView: UIPickerView!
     @IBOutlet var startButton: UIButton!
@@ -27,6 +27,10 @@ class StartGameViewController: UIViewController {
         startButton.backgroundColor = UIColor.purple()
         startButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         
+        spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        spinner.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0)
+        self.view.addSubview(spinner)
+        
         catePickerView.dataSource = self
         catePickerView.delegate = self
         catePickerView.showsSelectionIndicator = true
@@ -37,17 +41,19 @@ class StartGameViewController: UIViewController {
         let cateIndex = catePickerView.selectedRowInComponent(0)
         let cateName = categories[cateIndex]
         
+        
         if cateName == "MIX" {
             self.fetchMixGameData()
         } else {
             let cate = categoriesID[cateName]!
-            
+            spinner.startAnimating()
             WebService.fetchGameDataWith(categoryID: cate) { (result) in
                 switch result {
                 case .Success(let data):
                     let jsonData = JSON(data: data)["product_collection"].arrayValue
                     NSOperationQueue.mainQueue().addOperationWithBlock({
                         self.fetchDataSuccessAction(jsonData)
+                        self.spinner.stopAnimating()
                     })
                 case .Failure(let error):
                     print("\(error)")
@@ -55,9 +61,11 @@ class StartGameViewController: UIViewController {
                         let alertController = UIAlertController(title: "Connection Error", message: "Cannot fetch data from server", preferredStyle: .Alert)
                         let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                         alertController.addAction(alertAction)
+                        self.spinner.stopAnimating()
                         self.presentViewController(alertController, animated: true, completion: nil)
                     })
                 }
+                
             }
         }
     }
@@ -76,6 +84,7 @@ class StartGameViewController: UIViewController {
     func fetchMixGameData() {
         let gameDataGroup = dispatch_group_create()
         var mixJson = [JSON]()
+        spinner.startAnimating()
         for value in categories {
             let catId = categoriesID[value]!
             dispatch_group_enter(gameDataGroup)
@@ -94,6 +103,7 @@ class StartGameViewController: UIViewController {
         
         dispatch_group_notify(gameDataGroup, dispatch_get_main_queue()) {
             mixJson.shuffle()
+            self.spinner.stopAnimating()
             self.fetchDataSuccessAction(mixJson)
         }
     }

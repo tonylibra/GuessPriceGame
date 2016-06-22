@@ -279,6 +279,12 @@
                                     <action selector="priceButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bl8-Bk-6gB"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dIG-G0-mSQ">
+                                <rect key="frame" x="174" y="28" width="252" height="252"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dIG-G0-mSQ" secondAttribute="height" multiplier="1:1" id="UK6-Zd-jnD"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ooT-9e-7ZM">
                                 <rect key="frame" x="386" y="240" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -293,12 +299,6 @@
                                     <action selector="searchProductButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Dc-29-qOE"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dIG-G0-mSQ">
-                                <rect key="frame" x="174" y="28" width="252" height="252"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="dIG-G0-mSQ" secondAttribute="height" multiplier="1:1" id="UK6-Zd-jnD"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dIG-G0-mSQ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0gh-Hs-gIS">
