@@ -1,5 +1,7 @@
 #Guess Price Game
 
+![](https://github.com/tonylibra/GuessPriceGame/blob/master/ezgif-2005053310.gif)
+
 [Project Requirement](https://github.com/tonylibra/GuessPriceGame/blob/master/ProjectTODO.md)
 
 ##Structure
